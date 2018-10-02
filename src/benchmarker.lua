@@ -56,9 +56,11 @@ end
 
 function _M.run(self, ntimes)
     local results = {}
+    local i = 1
     for label, func in pairs(self._functions) do
         local score = self:timeit(ntimes, func)
-        table.insert(results, scenario_result_class.new(label, score))
+        results[i] = scenario_result_class.new(label, score)
+        i = i + 1
     end
 
     return result_class.new(results)
@@ -66,6 +68,7 @@ end
 
 function _M.run_by_time(self, d)
     local results = {}
+    local i = 1
     for label, func in pairs(self._functions) do
         self:_debug('running ' .. label)
         local score, err = self:countit(d, func)
@@ -73,7 +76,8 @@ function _M.run_by_time(self, d)
             self:_debug('error: ' .. err)
             return nil, err
         end
-        table.insert(results, scenario_result_class.new(label, score))
+        results[i] = scenario_result_class.new(label, score)
+        i = i + 1
     end
 
     return result_class.new(results), nil

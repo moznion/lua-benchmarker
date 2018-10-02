@@ -29,27 +29,41 @@ function _M.create_comparision_table(self)
     local rows = {}
     local header_row = {}
 
-    table.insert(header_row, "")
-    table.insert(header_row, "Rate")
+    local header_row_cursor = 1
+    header_row[header_row_cursor] = ""
+    header_row_cursor = header_row_cursor + 1
+    header_row[header_row_cursor] = "Rate"
+    header_row_cursor = header_row_cursor + 1
+
     for i, result in ipairs(self._scenario_results) do
-        table.insert(header_row, result.title)
+        header_row[header_row_cursor] = result.title
+        header_row_cursor = header_row_cursor + 1
     end
-    table.insert(rows, header_row)
+
+    local rows_cursor = 1
+    rows[rows_cursor] = header_row
+    rows_cursor = rows_cursor + 1
 
     for i, result in ipairs(self._scenario_results) do
         local row = {}
-        table.insert(row, result.title)
-        table.insert(row, result.score:format_rate())
+        local row_cursor = 1
+
+        row[row_cursor] = result.title
+        row_cursor = row_cursor + 1
+        row[row_cursor] = result.score:format_rate()
+        row_cursor = row_cursor + 1
 
         for j, col in ipairs(self._scenario_results) do
             if col:equals(result) then
-                table.insert(row, "--")
+                row[row_cursor] = "--"
             else
-                table.insert(row, string.format("%.0f%%", 100 * result.score:rate() / col.score:rate() - 100))
+                row[row_cursor] = string.format("%.0f%%", 100 * result.score:rate() / col.score:rate() - 100)
             end
+            row_cursor = row_cursor + 1
         end
 
-        table.insert(rows, row)
+        rows[rows_cursor] = row
+        rows_cursor = rows_cursor + 1
     end
 
     return rows
@@ -60,10 +74,8 @@ function _M.render_table(self, rows)
     local col_sizes = {}
 
     for x=1,#rows[1] do
-        table.insert(col_sizes, 1)
-    end
+        col_sizes[x] = 1
 
-    for x=1,#rows[1] do
         for y=1,#rows do
             local row = rows[y]
             local col = row[x]
