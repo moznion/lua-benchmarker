@@ -99,11 +99,11 @@ This method returns `result` and `err`. `result` instance that contains scores f
 
 ### `result` package
 
-#### `result:timethese()`
+#### `:timethese()`
 
 This method prints score with execution time.
 
-#### `result:cmpthese()`
+#### `:cmpthese()`
 
 This method prints score as a comparison chart.
 
