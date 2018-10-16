@@ -9,14 +9,14 @@ source = {
 description = {
    summary =  "A micro benchmarker for lua",
    homepage = "https://github.com/moznion/lua-benchmarker",
-   license = "MIT/X11",
+   license = "Artistic-1.0",
    maintainer = "moznion <moznion@gmail.com>",
 }
 
 dependencies = {
    "lua >= 5.1, <= 5.4",
-   "cputime >= 0.1.0-0",
-   "hires-time >= 0.0.1-0",
+   "cputime >= 0.2.0-0",
+   "hires-time >= 0.1.0-0",
 }
 
 build = {
