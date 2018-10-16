@@ -66,7 +66,7 @@ function _M.run(self, ntimes)
     return result_class.new(results)
 end
 
-function _M.run_by_time(self, d)
+function _M.run_within_time(self, d)
     local results = {}
     local i = 1
     for label, func in pairs(self._functions) do
